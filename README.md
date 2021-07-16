@@ -4,13 +4,24 @@ A demonstration of how to configure a modern C++ project properly.
 ## Requirements
 
 * **A C++ compiler**
+* **CMake 3.20.3 or later**
 
-## Building & Running
+## Building
+
+From the `cpp-template-2` directory:
 
 ```
-PS C:\git\cpp-template-2> cd src
-PS C:\git\cpp-template-2\src> g++ main.cpp -o main
-PS C:\git\cpp-template-2\src> ./main
+cmake -B build
+cmake --build build
+```
+
+...or open the project using your CMake-compatible IDE or editor like **CLion**, **Visual Studio**, or **Visual Studio Code with the appropriate CMake extension**.
+
+## Running
+
+Run `hello` (on Windows `hello.exe`) with no arguments:
+```
+> hello.exe
 Hello World!
 ```
 
