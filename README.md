@@ -3,7 +3,7 @@ A demonstration of how to configure a modern C++ project properly.
 
 ## Requirements
 
-* **A C++ compiler**
+* **A C++20 compiler**
 * **CMake 3.20.3 or later**
 
 ## Building
