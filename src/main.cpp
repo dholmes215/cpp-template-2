@@ -1,8 +1,9 @@
 #include "greeting.hpp"
 
-#include <iostream>
+#include <fmt/format.h>
+#include <fmt/ostream.h>
 
 int main()
 {
-    std::cout << hello::greeting{"World"} << '\n';
+    fmt::print("{}\n", hello::greeting{"World"});
 }

@@ -14,6 +14,9 @@ project(hello VERSION 0.0.1
               HOMEPAGE_URL https://github.com/dholmes215/cpp-template-2
               LANGUAGES CXX)
 
+# Find dependencies.
+find_package(fmt REQUIRED)
+
 # Targets can "link" this "library" to inherit project options.
 add_library(project_options INTERFACE)
 target_compile_features(project_options INTERFACE cxx_std_20) # Require _at least_ C++20.
