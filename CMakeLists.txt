@@ -15,6 +15,7 @@ project(hello VERSION 0.0.1
               LANGUAGES CXX)
 
 # Find dependencies.
+find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
 
 # Targets can "link" this "library" to inherit project options.
@@ -27,3 +28,8 @@ include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
 add_subdirectory(src)
+
+include(CTest)
+include(Catch)
+
+add_subdirectory(tests)
