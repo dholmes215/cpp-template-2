@@ -3,8 +3,10 @@
 namespace hello {
 
 std::ostream& operator<<(std::ostream& out, const greeting& obj) {
-    out << "Hello " << obj.name << '!';
-    return out;
+    if (obj.name.empty()) {
+        return out << "Hello!";
+    }
+    return out << "Hello " << obj.name << '!';
 }
 
 }  // namespace hello
