@@ -8,7 +8,7 @@ namespace hello {
 
 struct greeting {
     std::string name{};
-    friend std::ostream& operator<<(std::ostream& out, const greeting& obj);
+    friend auto operator<<(std::ostream& out, const greeting& obj) -> std::ostream&;
 };
 
 }  // namespace hello

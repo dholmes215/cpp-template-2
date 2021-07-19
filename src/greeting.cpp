@@ -2,7 +2,7 @@
 
 namespace hello {
 
-std::ostream& operator<<(std::ostream& out, const greeting& obj) {
+auto operator<<(std::ostream& out, const greeting& obj) -> std::ostream& {
     if (obj.name.empty()) {
         return out << "Hello!";
     }
