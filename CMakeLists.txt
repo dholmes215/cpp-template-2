@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.20.3)
 
+# Update submodules.
+include(cmake/UpdateSubmodule.cmake)
+option(GIT_SUBMODULE "Check submodules during build" ON)
+update_submodule("${CMAKE_CURRENT_LIST_DIR}/vcpkg")
+
 project(hello VERSION 0.0.1
               DESCRIPTION "Application to print \"Hello World!\""
               HOMEPAGE_URL https://github.com/dholmes215/cpp-template-2
