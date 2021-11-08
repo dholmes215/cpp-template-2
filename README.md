@@ -8,11 +8,16 @@ A demonstration of how to configure a modern C++ project properly.
 
 ## Building
 
-From the `cpp-template-2` directory:
+To configure the build system:
 
 ```
-cmake -B build
-cmake --build build
+cmake -S [project_root_dir] -B [output_dir]
+```
+
+To build the project after configuring:
+
+```
+cmake --build [output_dir]
 ```
 
 ...or open the project using your CMake-compatible IDE or editor like **CLion**, **Visual Studio**, or **Visual Studio Code with the appropriate CMake extension**.
