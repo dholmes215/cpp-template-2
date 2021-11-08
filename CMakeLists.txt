@@ -27,6 +27,9 @@ add_library(project_warnings INTERFACE)
 include(cmake/CompilerWarnings.cmake)
 set_project_warnings(project_warnings)
 
+# Allow for static analysis options.
+include(cmake/StaticAnalyzers.cmake)
+
 add_subdirectory(src)
 
 include(CTest)
