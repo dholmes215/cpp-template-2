@@ -1,7 +1,6 @@
 #include "greeting.hpp"
 
 #include <fmt/format.h>
-#include <fmt/ostream.h>
 
 int main()
 {
