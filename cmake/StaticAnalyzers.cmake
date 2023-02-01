@@ -5,12 +5,7 @@ option(ENABLE_INCLUDE_WHAT_YOU_USE "Enable static analysis with include-what-you
 if(ENABLE_CPPCHECK)
   find_program(CPPCHECK cppcheck)
   if(CPPCHECK)
-    set(CMAKE_CXX_CPPCHECK
-        ${CPPCHECK}
-        --suppress=missingInclude
-        --enable=all
-        --inline-suppr
-        --inconclusive)
+    set(CMAKE_CXX_CPPCHECK ${CPPCHECK} --suppress=missingInclude --enable=all --inline-suppr --inconclusive)
     if(WARNINGS_AS_ERRORS)
       list(APPEND CMAKE_CXX_CPPCHECK --error-exitcode=2)
     endif()

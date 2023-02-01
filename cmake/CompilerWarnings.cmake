@@ -1,5 +1,4 @@
-# This file is copied from:
-# https://github.com/lefticus/cpp_starter_project/blob/master/cmake/CompilerWarnings.cmake
+# This file is copied from: https://github.com/lefticus/cpp_starter_project/blob/master/cmake/CompilerWarnings.cmake
 
 function(set_project_warnings project_name)
   option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors" TRUE)
@@ -27,7 +26,7 @@ function(set_project_warnings project_name)
       /w14905 # wide string literal cast to 'LPSTR'
       /w14906 # string literal cast to 'LPWSTR'
       /w14928 # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
-      /permissive- # standards conformance mode for MSVC compiler.
+      /permissive- # standards conformance Smode for MSVC compiler.
   )
 
   set(CLANG_WARNINGS
