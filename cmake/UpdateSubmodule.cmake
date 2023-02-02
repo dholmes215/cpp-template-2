@@ -1,7 +1,7 @@
 # Initialize and update one specific git submodule. Adapted from
 # https://cliutils.gitlab.io/modern-cmake/chapters/projects/submodule.html
 function(update_submodule SUBMODULE_PATH)
-  if(GIT_SUBMODULE)
+  if(PROJECT_GIT_SUBMODULE)
     find_package(Git QUIET REQUIRED)
     message(STATUS "Updating submodule: ${SUBMODULE_PATH}")
     cmake_path(GET SUBMODULE_PATH PARENT_PATH SUBMODULE_PARENT_DIR)

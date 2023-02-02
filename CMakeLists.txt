@@ -1,13 +1,16 @@
 cmake_minimum_required(VERSION 3.20.3)
 
-# Update submodules.
-include(cmake/UpdateSubmodule.cmake)
-option(GIT_SUBMODULE "Check submodules during build" ON)
-update_submodule("${CMAKE_CURRENT_LIST_DIR}/vcpkg")
+option(PROJECT_USE_VCPKG "Use vcpkg for library dependencies" ON)
+option(PROJECT_GIT_SUBMODULE "Update submodules during build" OFF)
+if(PROJECT_USE_VCPKG)
+  # Optionally update vcpkg submodule (mainly for use by CI)
+  include(cmake/UpdateSubmodule.cmake)
+  update_submodule("${CMAKE_CURRENT_LIST_DIR}/vcpkg")
 
-# Configure vcpkg (requires vcpkg submodule)
-include(cmake/ConfigureVcpkg.cmake)
-configure_vcpkg("${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+  # Configure vcpkg
+  include(cmake/ConfigureVcpkg.cmake)
+  configure_vcpkg("${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
+endif()
 
 project(
   hello
