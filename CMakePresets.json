@@ -14,6 +14,8 @@
             "description": "Default build using Ninja Multi-Config generator",
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
+                "PROJECT_USE_VCPKG": "ON",
+                "PROJECT_GIT_SUBMODULE": "ON",
                 "PROJECT_WARNINGS_AS_ERRORS": "ON",
                 "PROJECT_ENABLE_CPPCHECK": "ON",
                 "PROJECT_ENABLE_CLANG_TIDY": "ON",
