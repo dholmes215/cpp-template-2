@@ -2,7 +2,7 @@
 
 #include <fmt/format.h>
 
-int main()
+auto main() -> int
 {
     fmt::print("{}\n", hello::greeting{"World"});
 }
