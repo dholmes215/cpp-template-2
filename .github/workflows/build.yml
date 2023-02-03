@@ -24,8 +24,8 @@ jobs:
       run: sudo apt-get update && sudo apt-get install ninja-build cppcheck -y
       if: matrix.platform.os == 'ubuntu-22.04'
 
-    - name: Install ninja & brew llvm (MacOS)
-      run: brew install ninja llvm
+    - name: Install ninja & cppcheck (MacOS)
+      run: brew install ninja cppcheck
       if: matrix.platform.os == 'macos-12'
 
     - uses: actions/checkout@v2
