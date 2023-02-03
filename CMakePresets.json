@@ -42,7 +42,7 @@
             "name": "vs2022-amd64",
             "inherits": "user-default",
             "generator": "Visual Studio 17 2022",
-            "architecture": "Win64"
+            "architecture": "x64"
         }
     ],
     "buildPresets": [
