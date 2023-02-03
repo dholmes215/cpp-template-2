@@ -20,6 +20,14 @@ jobs:
       BUILD_DIR: ${{github.workspace}}/build/${{matrix.platform.config_preset}}
 
     steps:
+    - name: Install ninja (Ubuntu)
+      run: sudo apt-get update && sudo apt-get install ninja-build -y
+      if: matrix.platform.os == 'ubuntu-20.04'
+
+    - name: Install ninja (MacOS)
+      run: brew install ninja
+      if: matrix.platform.os == 'macos-12'
+
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
