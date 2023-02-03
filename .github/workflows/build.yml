@@ -9,38 +9,35 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-        - { os: windows-2022, cc: cl.exe,   cxx: cl.exe }
-        - { os: ubuntu-22.04, cc: gcc-11,   cxx: g++-11 }
-        - { os: ubuntu-22.04, cc: clang-14, cxx: clang++-14 }
-        - { os: macos-12,     cc: clang,    cxx: clang++ }
-        build_type: [Release, Debug]
+        - { os: windows-2022, config_preset: vs2022-amd64 }
+        - { os: ubuntu-22.04, config_preset: gcc11-amd64 }
+        - { os: ubuntu-22.04, config_preset: clang14-amd64 }
+        - { os: macos-12,     config_preset: clang14-amd64 }
+        build_type: [release, debug]
 
     env:
       SOURCE_DIR: ${{github.workspace}}
-      BUILD_DIR: ${{github.workspace}}/build
-      # CMake will choose a compiler using these environment variables.
-      CC: ${{matrix.platform.cc}}
-      CXX: ${{matrix.platform.cxx}}
+      BUILD_DIR: ${{github.workspace}}/build/${{matrix.platform.config_preset}}
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Create Build Environment
-      # We'll use this as our working directory for all subsequent commands.
+      # We'll use this as our working directory for subsequent commands.
       run: cmake -E make_directory ${{env.BUILD_DIR}}
 
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
       # access regardless of the host operating system.
       shell: bash
-      working-directory: ${{env.BUILD_DIR}}
-      run: cmake -S $SOURCE_DIR -B $BUILD_DIR -DCMAKE_BUILD_TYPE=${{matrix.build_type}} -DWARNINGS_AS_ERRORS=ON
+      working-directory: ${{env.SOURCE_DIR}}
+      run: cmake --preset ${{matrix.platform.config_preset}}
 
     - name: Build
-      working-directory: ${{env.BUILD_DIR}}
+      working-directory: ${{env.SOURCE_DIR}}
       shell: bash
       # Execute the build.  You can specify a specific target with "--target <NAME>".
-      run: cmake --build . --config ${{matrix.build_type}}
+      run: cmake --build --preset ${{matrix.platform.config_preset}}-${{matrix.build_type}}
 
     - name: Test
       working-directory: ${{env.BUILD_DIR}}

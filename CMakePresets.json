@@ -1,0 +1,78 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 20,
+        "patch": 3
+    },
+    "configurePresets": [
+        {
+            "name": "user-default",
+            "hidden": true,
+            "displayName": "Base for other presets to inherit",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "description": "Default build using Ninja Multi-Config generator",
+            "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "PROJECT_WARNINGS_AS_ERRORS": "ON",
+                "PROJECT_ENABLE_CPPCHECK": "ON",
+                "PROJECT_ENABLE_CLANG_TIDY": "ON",
+                "PROJECT_ENABLE_INCLUDE_WHAT_YOU_USE": "OFF"
+            }
+        },
+        {
+            "name": "clang14-amd64",
+            "inherits": "user-default",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang-14",
+                "CMAKE_CXX_COMPILER": "clang++-14"
+            }
+        },
+        {
+            "name": "gcc11-amd64",
+            "inherits": "user-default",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc-11",
+                "CMAKE_CXX_COMPILER": "g++-11"
+            }
+        },
+        {
+            "name": "vs2022-amd64",
+            "inherits": "user-default",
+            "generator": "Visual Studio 17 2022",
+            "architecture": "Win64"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "clang14-amd64-debug",
+            "configurePreset": "clang14-amd64",
+            "configuration": "Debug"
+        },
+        {
+            "name": "clang14-amd64-release",
+            "configurePreset": "clang14-amd64",
+            "configuration": "Release"
+        },
+        {
+            "name": "gcc11-amd64-debug",
+            "configurePreset": "gcc11-amd64",
+            "configuration": "Debug"
+        },
+        {
+            "name": "gcc11-amd64-release",
+            "configurePreset": "gcc11-amd64",
+            "configuration": "Release"
+        },
+        {
+            "name": "vs2022-amd64-debug",
+            "configurePreset": "vs2022-amd64",
+            "configuration": "Debug"
+        },
+        {
+            "name": "vs2022-amd64-release",
+            "configurePreset": "vs2022-amd64",
+            "configuration": "Release"
+        }
+    ]
+}
