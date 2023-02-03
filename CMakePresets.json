@@ -42,7 +42,12 @@
             "name": "vs2022-amd64",
             "inherits": "user-default",
             "generator": "Visual Studio 17 2022",
-            "architecture": "x64"
+            "architecture": "x64",
+            "cacheVariables": {
+                "PROJECT_ENABLE_CPPCHECK": "OFF",
+                "PROJECT_ENABLE_CLANG_TIDY": "OFF",
+                "PROJECT_ENABLE_INCLUDE_WHAT_YOU_USE": "OFF"
+            }
         }
     ],
     "buildPresets": [
