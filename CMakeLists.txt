@@ -11,6 +11,7 @@ if(PROJECT_USE_VCPKG)
   include(cmake/ConfigureVcpkg.cmake)
   configure_vcpkg("${CMAKE_CURRENT_LIST_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake")
 endif()
+set(CMAKE_SYSTEM_PROCESSOR x86)
 
 project(
   hello
@@ -20,7 +21,9 @@ project(
   LANGUAGES CXX)
 
 # Find dependencies.
-find_package(Catch2 REQUIRED)
+if(BUILD_TESTING)
+  find_package(Catch2 REQUIRED)
+endif()
 find_package(fmt REQUIRED)
 
 # Targets can "link" this "library" to inherit project options.
@@ -37,7 +40,8 @@ include(cmake/StaticAnalyzers.cmake)
 
 add_subdirectory(src)
 
-include(CTest)
-include(Catch)
-
-add_subdirectory(tests)
+if(BUILD_TESTING)
+  include(CTest)
+  include(Catch)
+  add_subdirectory(tests)
+endif()
