@@ -37,5 +37,8 @@ build
 # VSCode settings directory
 .vscode
 
+# JetBrains IDE settings directory
+.idea
+
 # Local configuration
 CMakeUserPresets.json
