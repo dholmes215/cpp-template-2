@@ -38,6 +38,11 @@ set_project_warnings(project_warnings)
 # Allow for static analysis options.
 include(cmake/StaticAnalyzers.cmake)
 
+option(PROJECT_OUTPUT_HTML "Generate a .html file for WASM/Emscripten builds" OFF)
+if (PROJECT_OUTPUT_HTML)
+  set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif()
+
 add_subdirectory(src)
 
 if(BUILD_TESTING)
