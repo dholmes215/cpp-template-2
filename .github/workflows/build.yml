@@ -12,6 +12,7 @@ jobs:
         - { os: windows-2022, config_preset: vs2022-amd64 }
         - { os: ubuntu-22.04, config_preset: gcc-amd64 }
         - { os: ubuntu-22.04, config_preset: clang-amd64 }
+        - { os: ubuntu-22.04, config_preset: emscripten-wasm32 }
         - { os: macos-12,     config_preset: appleclang-amd64 }
         build_type: [release, debug]
 
@@ -20,6 +21,8 @@ jobs:
       BUILD_DIR: ${{github.workspace}}/build/${{matrix.platform.config_preset}}
 
     steps:
+    - uses: actions/checkout@v2
+
     - name: Install ninja & cppcheck (Ubuntu)
       run: sudo apt-get update && sudo apt-get install ninja-build cppcheck -y
       if: matrix.platform.os == 'ubuntu-22.04'
@@ -28,7 +31,20 @@ jobs:
       run: brew install ninja cppcheck
       if: matrix.platform.os == 'macos-12'
 
-    - uses: actions/checkout@v2
+    - name: Setup emsdk
+      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      uses: mymindstorm/setup-emsdk@v11
+      with:
+        # Make sure to set a version number!
+        version: 3.1.28
+        # This is the name of the cache folder.
+        # The cache folder will be placed in the build directory,
+        #  so make sure it doesn't conflict with anything!
+        actions-cache-folder: 'emsdk-cache'
+    
+    - name: Verify emsdk
+      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      run: emcc -v
 
     - name: Create Build Environment
       # We'll use this as our working directory for subsequent commands.

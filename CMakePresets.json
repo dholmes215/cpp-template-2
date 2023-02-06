@@ -14,6 +14,7 @@
             "description": "Default build using Ninja Multi-Config generator",
             "generator": "Ninja Multi-Config",
             "cacheVariables": {
+                "BUILD_TESTING": "ON",
                 "PROJECT_USE_VCPKG": "ON",
                 "PROJECT_GIT_SUBMODULE": "ON",
                 "PROJECT_WARNINGS_AS_ERRORS": "ON",
@@ -54,6 +55,16 @@
                 "PROJECT_ENABLE_CPPCHECK": "OFF",
                 "PROJECT_ENABLE_CLANG_TIDY": "OFF",
                 "PROJECT_ENABLE_INCLUDE_WHAT_YOU_USE": "OFF"
+            }
+        },
+        {
+            "name": "emscripten-wasm32",
+            "inherits": "user-default",
+            "cacheVariables": {
+                "BUILD_TESTING": "OFF",
+                "PROJECT_OUTPUT_HTML": "ON",
+                "CMAKE_TOOLCHAIN_FILE": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+                "VCPKG_TARGET_TRIPLET": "wasm32-emscripten"
             }
         }
     ],
@@ -96,6 +107,16 @@
         {
             "name": "vs2022-amd64-release",
             "configurePreset": "vs2022-amd64",
+            "configuration": "Release"
+        },
+        {
+            "name": "emscripten-wasm32-debug",
+            "configurePreset": "emscripten-wasm32",
+            "configuration": "Debug"
+        },
+        {
+            "name": "emscripten-wasm32-release",
+            "configurePreset": "emscripten-wasm32",
             "configuration": "Release"
         }
     ]
