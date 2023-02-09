@@ -33,18 +33,9 @@ jobs:
 
     - name: Setup emsdk
       if: matrix.platform.config_preset == 'emscripten-wasm32'
-      uses: mymindstorm/setup-emsdk@v11
-      with:
-        # Make sure to set a version number!
-        version: 3.1.28
-        # This is the name of the cache folder.
-        # The cache folder will be placed in the build directory,
-        #  so make sure it doesn't conflict with anything!
-        actions-cache-folder: 'emsdk-cache'
-    
-    - name: Verify emsdk
-      if: matrix.platform.config_preset == 'emscripten-wasm32'
-      run: emcc -v
+      run: |
+           tools/setup-emsdk.sh
+           echo 'source "$EMSDK/emsdk_env.sh"' >> /home/runner/.bash_profile
 
     - name: Create Build Environment
       # We'll use this as our working directory for subsequent commands.
