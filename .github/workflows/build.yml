@@ -66,3 +66,9 @@ jobs:
       shell: bash
       # Build the package target.
       run: cmake --build --preset ${{matrix.platform.config_preset}}-${{matrix.build_type}} --target package
+
+    - name: Upload package artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-package
+        path: ${{env.BUILD_DIR}}/*-*.*.*-* # TODO: Something better
