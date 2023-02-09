@@ -63,8 +63,9 @@
             "cacheVariables": {
                 "BUILD_TESTING": "OFF",
                 "PROJECT_OUTPUT_HTML": "ON",
-                "CMAKE_TOOLCHAIN_FILE": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
-                "VCPKG_TARGET_TRIPLET": "wasm32-emscripten"
+                "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/tools/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake",
+                "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/vcpkg-triplets",
+                "VCPKG_TARGET_TRIPLET": "wasm32-emscripten-local"
             }
         }
     ],
