@@ -38,15 +38,40 @@ set_project_warnings(project_warnings)
 # Allow for static analysis options.
 include(cmake/StaticAnalyzers.cmake)
 
-option(PROJECT_OUTPUT_HTML "Generate a .html file for WASM/Emscripten builds" OFF)
-if (PROJECT_OUTPUT_HTML)
-  set(CMAKE_EXECUTABLE_SUFFIX ".html")
-endif()
-
 add_subdirectory(src)
 
 if(BUILD_TESTING)
   include(CTest)
   include(Catch)
   add_subdirectory(tests)
+endif()
+
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+
+  set(CPACK_PACKAGE_NAME MyProj)
+  set(CPACK_PACKAGE_VENDOR MyCompany)
+  set(CPACK_PACKAGE_CONTACT "John Doe")
+  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CPack example project")
+  set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CPACK_PACKAGE_NAME})
+  set(CPACK_PACKAGE_VERSION_MAJOR ${PROJECT_VERSION_MAJOR})
+  set(CPACK_PACKAGE_VERSION_MINOR ${PROJECT_VERSION_MINOR})
+  set(CPACK_PACKAGE_VERSION_PATCH ${PROJECT_VERSION_PATCH})
+  set(CPACK_VERBATIM_VARIABLES YES)
+
+  # set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_LIST_DIR}/Description.txt)
+  # set(CPACK_RESOURCE_FILE_WELCOME ${CMAKE_CURRENT_LIST_DIR}/Welcome.txt)
+  # set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_LIST_DIR}/License.txt)
+  # set(CPACK_RESOURCE_FILE_README ${CMAKE_CURRENT_LIST_DIR}/Readme.txt)
+
+  if(WIN32)
+    set(CPACK_GENERATOR ZIP WIX)
+  elseif(APPLE)
+    set(CPACK_GENERATOR TGZ productbuild)
+  elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(CPACK_GENERATOR TGZ RPM DEB)
+  else()
+    set(CPACK_GENERATOR TGZ)
+  endif()
+
+  include(CPack)
 endif()
