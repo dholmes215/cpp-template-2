@@ -70,5 +70,5 @@ jobs:
     - name: Upload package artifact
       uses: actions/upload-artifact@v3
       with:
-        name: build-package
+        name: ${{matrix.platform.config_preset}}-${{matrix.build_type}}
         path: ${{env.BUILD_DIR}}/*-*.*.*-* # TODO: Something better
