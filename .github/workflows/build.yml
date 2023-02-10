@@ -21,7 +21,7 @@ jobs:
       BUILD_DIR: ${{github.workspace}}/build/${{matrix.platform.config_preset}}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Install ninja & cppcheck (Ubuntu)
       run: sudo apt-get update && sudo apt-get install ninja-build cppcheck -y
