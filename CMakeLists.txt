@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20.3)
+cmake_minimum_required(VERSION 3.21.0)
 
 option(PROJECT_USE_VCPKG "Use vcpkg for library dependencies" ON)
 option(PROJECT_GIT_SUBMODULE "Update submodules during build" OFF)
