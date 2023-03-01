@@ -19,6 +19,7 @@ jobs:
     env:
       SOURCE_DIR: ${{github.workspace}}
       BUILD_DIR: ${{github.workspace}}/build/${{matrix.platform.config_preset}}
+      DEPLOY_DIR: ${{github.workspace}}/deploy/${{matrix.platform.config_preset}}
 
     steps:
     - uses: actions/checkout@v3
@@ -72,3 +73,21 @@ jobs:
       with:
         name: ${{matrix.platform.config_preset}}-${{matrix.build_type}}
         path: ${{env.BUILD_DIR}}/*-*.*.*-* # TODO: Something better
+
+    # TODO: Move these to a different workflow that just deploys
+    - name: Download WASM Artifact
+      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{matrix.platform.config_preset}}-${{matrix.build_type}}
+        path: ${{env.DEPLOY_DIR}}
+
+    - name: Unzip WASM Artifact
+      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      working-directory: ${{env.DEPLOY_DIR}}
+      shell: bash
+      run: |
+        pwd
+        ls -l
+        unzip  ${{matrix.platform.config_preset}}-${{matrix.build_type}}
+        ls -l
