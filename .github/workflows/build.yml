@@ -89,5 +89,5 @@ jobs:
       run: |
         pwd
         ls -l
-        unzip  ${{matrix.platform.config_preset}}-${{matrix.build_type}}
+        tar -xzvf `ls`
         ls -l
