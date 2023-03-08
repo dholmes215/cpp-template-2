@@ -81,17 +81,17 @@ jobs:
         path: ${{env.BUILD_DIR}}/*-*.*.*-* # TODO: Something better
 
     - name: Repackage WASM package contents for GitHub Pages
-      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
       shell: bash
       run: |
            mkdir ${{env.DEPLOY_DIR}}
            cd ${{env.DEPLOY_DIR}}
            tar -xzvr ${{env.BUILD_DIR}}/*-*.*.*-*.tar.gz
     - name: Setup Pages
-      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
       uses: actions/configure-pages@v3
     - name: Upload artifact
-      if: matrix.platform.config_preset == 'emscripten-wasm32'
+      if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
       uses: actions/upload-pages-artifact@v1
       with:
         # Upload DEPLOY_DIR folder
