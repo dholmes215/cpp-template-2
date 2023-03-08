@@ -86,7 +86,7 @@ jobs:
       run: |
            mkdir -p ${{env.DEPLOY_DIR}}
            cd ${{env.DEPLOY_DIR}}
-           tar -xzvr ${{env.BUILD_DIR}}/*-*.*.*-*.tar.gz
+           tar -xzvf ${{env.BUILD_DIR}}/*-*.*.*-*.tar.gz
     - name: Setup Pages
       if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
       uses: actions/configure-pages@v3
