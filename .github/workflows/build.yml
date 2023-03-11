@@ -87,6 +87,7 @@ jobs:
            mkdir -p ${{env.DEPLOY_DIR}}
            cd ${{env.DEPLOY_DIR}}
            tar -xzvf ${{env.BUILD_DIR}}/*-*.*.*-*.tar.gz
+           echo "PACKAGE_NAME=`ls`" >> $GITHUB_ENV
     - name: Setup Pages
       if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
       uses: actions/configure-pages@v3
@@ -95,7 +96,7 @@ jobs:
       uses: actions/upload-pages-artifact@v1
       with:
         # Upload DEPLOY_DIR folder
-        path: ${{env.DEPLOY_DIR}}
+        path: ${{env.DEPLOY_DIR}}/${{env.PACKAGE_NAME}}/bin/
 
     - name: Deploy to GitHub Pages
       if: matrix.platform.config_preset == 'emscripten-wasm32' && matrix.build_type == 'release'
